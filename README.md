@@ -13,9 +13,7 @@
 </p>
 
 <p align="center">
-  <img src="assets/<img width="1448" height="744" alt="screenshot1" src="https://github.com/user-attachments/assets/f9b8127a-ddab-4e51-97a3-40e83f606816" />
-()
-" alt="NASA API Explorer screenshot" width="800">
+  <img src="assets/screenshot.png" alt="NASA API Explorer screenshot" width="800">
 </p>
 
 <p align="center">
@@ -38,6 +36,62 @@ The project focuses on the fundamentals of working with real-world APIs: asynchr
 - **Reliable data loading:** every section shows loading, empty and error states, and requests time out after 10 seconds
 - **Responsive design:** fixed header with smooth-scroll navigation and a hamburger menu on small screens
 
+## APIs
+
+| Section | API | Key required |
+| --- | --- | --- |
+| Home | [APOD](https://api.nasa.gov) | Yes |
+| Asteroids | [NeoWs](https://api.nasa.gov) | Yes |
+| Earth | [EPIC](https://api.nasa.gov) | Yes |
+| Mars, Gallery | [NASA Image and Video Library](https://images.nasa.gov) | No |
+
+> NASA has archived the Mars Rover Photos API, so the Mars section uses the Image and Video Library instead.
+
+## Getting Started
+
+**1. Clone the repository**
+
+```bash
+git clone https://github.com/Naznighty/nasa-api-explorer.git
+cd nasa-api-explorer
+```
+
+**2. Add your API key**
+
+Get a free key at [api.nasa.gov](https://api.nasa.gov) and set it at the top of `script.js`:
+
+```js
+const KEY = "YOUR_API_KEY";
+```
+
+The default `DEMO_KEY` works for testing but has a low request limit.
+
+**3. Run it**
+
+Open `index.html` in your browser, or use the Live Server extension in VS Code.
+
+## Project Structure
+
+```
+nasa-api-explorer/
+├── index.html    # page structure
+├── style.css     # black and gold theme, responsive layout
+├── script.js     # API calls, rendering, mobile menu
+└── assets/       # screenshots
+```
+
+## How It Works
+
+A single `load()` helper in `script.js` fetches a URL, converts the response into cards and handles the empty and error states. Each section of the page is just one call to this helper, which keeps the code short and easy to extend with a new API.
+
+## Author
+
+**Nazanin Rahgozar**
+[GitHub](https://github.com/Naznighty) · [LinkedIn](https://www.linkedin.com/in/nazanin-rahgozar-7b816b42b/)
+
+## Acknowledgements
+
+All data is provided by [NASA Open APIs](https://api.nasa.gov).
 ## APIs
 
 | Section | API | Key required |
