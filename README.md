@@ -13,7 +13,8 @@
 </p>
 
 <p align="center">
-  <img src="assets/![Uploading screenshot1.png…]()
+  <img src="assets/<img width="1448" height="744" alt="screenshot1" src="https://github.com/user-attachments/assets/f9b8127a-ddab-4e51-97a3-40e83f606816" />
+()
 " alt="NASA API Explorer screenshot" width="800">
 </p>
 
