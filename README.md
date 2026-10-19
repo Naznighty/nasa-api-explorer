@@ -34,6 +34,8 @@ The project focuses on the fundamentals of working with real-world APIs: asynchr
 - **Earth from space:** the latest natural-color images of Earth from NASA's EPIC camera
 - **Image search:** look up anything in NASA's public image archive by keyword
 - **Reliable data loading:** every section shows loading, empty and error states, and requests time out after 10 seconds
+- **Contact form:** name and email fields with live client-side validation and clear error messages
+- **Dark and light themes:** a night-sky theme and a morning-sky theme, with the choice saved in the browser
 - **Responsive design:** fixed header with smooth-scroll navigation and a hamburger menu on small screens
 
 ## APIs

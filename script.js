@@ -1,4 +1,4 @@
-const KEY = "KUbQoCrN85aHaZJEY8n7fPDDJyj6lGpLRaXfBD2j";
+const KEY = "DEMO_KEY"; // replace with your own key from api.nasa.gov
 const API = "https://api.nasa.gov";
 const LIBRARY = "https://images-api.nasa.gov/search?media_type=image&q=";
 const $ = (id) => document.getElementById(id);
@@ -75,11 +75,27 @@ load(
   imageCard,
 );
 
+function setActive(q) {
+  document.querySelectorAll(".chip").forEach((chip) => {
+    const on = chip.dataset.q === q.toLowerCase();
+    chip.classList.toggle("active", on);
+    chip.setAttribute("aria-pressed", on);
+  });
+}
+
 function search(q) {
   if (!q) return;
+  setActive(q);
   $("results").textContent = "Loading...";
   load("results", LIBRARY + encodeURIComponent(q), libraryItems, imageCard);
 }
+
+$("filters").addEventListener("click", (e) => {
+  const q = e.target.dataset.q;
+  if (!q) return;
+  $("q").value = q;
+  search(q);
+});
 
 $("searchForm").addEventListener("submit", (e) => {
   e.preventDefault();
@@ -87,6 +103,55 @@ $("searchForm").addEventListener("submit", (e) => {
 });
 
 search("nebula");
+
+const form = $("contactForm");
+
+const rules = {
+  name: (v) =>
+    !v
+      ? "Name is required."
+      : v.length < 2
+        ? "Name must be at least 2 characters."
+        : !/^[\p{L}\s'.-]+$/u.test(v)
+          ? "Name can only contain letters."
+          : "",
+  email: (v) =>
+    !v
+      ? "Email is required."
+      : !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)
+        ? "Please enter a valid email address."
+        : "",
+};
+
+function check(input) {
+  const msg = rules[input.name](input.value.trim());
+  input.classList.toggle("invalid", !!msg);
+  input.setAttribute("aria-invalid", !!msg);
+  $(input.id + "Msg").textContent = msg;
+  return !msg;
+}
+
+const fields = [...form.querySelectorAll("input")];
+
+fields.forEach((input) => {
+  input.addEventListener("blur", () => check(input));
+  input.addEventListener(
+    "input",
+    () => input.classList.contains("invalid") && check(input),
+  );
+});
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const results = fields.map(check);
+  if (results.includes(false)) {
+    $("formStatus").textContent = "";
+    fields[results.indexOf(false)].focus();
+    return;
+  }
+  $("formStatus").textContent = `Thank you, ${$("contactName").value.trim()}!`;
+  form.reset();
+});
 
 const menuBtn = document.querySelector(".menu-btn");
 const nav = document.querySelector("nav");
@@ -104,3 +169,19 @@ nav.addEventListener(
   "click",
   (e) => e.target.tagName === "A" && setMenu(false),
 );
+
+const themeBtn = document.querySelector(".theme-btn");
+
+function setTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  localStorage.setItem("theme", theme);
+  themeBtn.innerHTML = `<i class="fa-solid ${theme === "dark" ? "fa-sun" : "fa-moon"}"></i>`;
+}
+
+themeBtn.addEventListener("click", () => {
+  setTheme(
+    document.documentElement.dataset.theme === "dark" ? "light" : "dark",
+  );
+});
+
+setTheme(document.documentElement.dataset.theme);
