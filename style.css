@@ -30,7 +30,6 @@
 }
 
 :root[data-theme="light"] {
-  /* morning sky */
   color-scheme: light;
   --bg-layers:
     radial-gradient(circle at 88% -5%, #fff7ebe6 0%, #fff7eb00 42%),
